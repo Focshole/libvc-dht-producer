@@ -1,0 +1,11 @@
+build/
+.clang-format
+.clang-tidy
+.vimrc
+.ycm_extra_conf.py
+compile_commands.json
+.vscode/
+.gdb_history
+dhtCert.pem
+dhtCert.crt
+cmake/FindLibVersioningCompiler.cmake
