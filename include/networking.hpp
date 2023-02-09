@@ -9,5 +9,5 @@
 #include <unistd.h>
 #include <zmq.h>
 
-#define CHUNK_SIZE 250000
+#define CHUNK_SIZE 25000
 int serveVersion(std::filesystem::path bin_path, int port) ;

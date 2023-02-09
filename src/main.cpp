@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 
-#include "producer-args.hpp"
 #include "libvc.hpp"
 #include "networking.hpp"
+#include "producer-args.hpp"
 
 const std::filesystem::path sourceCode =
     std::filesystem::u8path("../code-to-compile/example.cpp");
@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
   // generated EC key pair, and listen on port 4224.
   // It is possible to use sockets too.
   node.run(p.dht_port, p.identity, true);
-  std::cout << "DHT node started on port "<<p.dht_port << std::endl;
+  std::cout << "DHT node started on port " << p.dht_port << std::endl;
 
   // Join the network through any running node,
   // here using a known bootstrap node.
@@ -43,8 +43,11 @@ int main(int argc, char **argv) {
     std::cout << "Generated binary at " << bin_path << std::endl;
     const unsigned int port = 4242;
     // Publish the socket address from which the binary can be downloaded
-    node.putSigned(sourceCode, std::string("127.0.0.1:")+std::to_string(port));
+    node.put(exampleFunctionName,
+             (std::string("tcp://127.0.0.1:") + std::to_string(port)).c_str());
     // Serve the binary forever
+
+    std::cout << "Published " << exampleFunctionName << std::endl;
     auto ctx = serveVersion(bin_path, port);
 
   } else {

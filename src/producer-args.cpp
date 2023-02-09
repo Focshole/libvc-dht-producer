@@ -35,7 +35,7 @@ void printUsage(const char *filename) {
 args parseArgs(int argc, char **argv) {
   args params;
   int opt;
-  while ((opt = getopt_long(argc, argv, "hcpPs", args_getopt_struct,
+  while ((opt = getopt_long(argc, argv, "h:c:p:P:s:", args_getopt_struct,
                             nullptr)) != -1) {
     switch (opt) {
     case 'c':
@@ -50,7 +50,7 @@ args parseArgs(int argc, char **argv) {
       break;
     case 'P':
       try {
-        params.dht_port = std::stoi(optarg);
+        params.dht_port = atoi(optarg);
         if (params.dht_port <= 0 || params.dht_port > 65535) {
           throw std::out_of_range("Port number out of range");
         }
