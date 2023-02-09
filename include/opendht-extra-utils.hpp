@@ -10,7 +10,8 @@
 #include <gnutls/gnutls.h>
 #include <string>
 #include <vector>
-
+// if PR https://github.com/savoirfairelinux/opendht/pull/655 gets merged,
+// replace all calls to importIdentity with dht::crypto::loadIdentity
 namespace dht {
 namespace crypto {
 dht::crypto::Identity importIdentity(const std::string &path,

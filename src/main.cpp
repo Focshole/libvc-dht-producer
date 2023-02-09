@@ -19,14 +19,14 @@ int main(int argc, char **argv) {
   // Launch a dht node on a new thread, using a
   // generated EC key pair, and listen on port 4224.
   // It is possible to use sockets too.
-  node.run(4224U, p.identity, true);
-  std::cout << "DHT node started on port 4224" << std::endl;
+  node.run(p.dht_port, p.identity, true);
+  std::cout << "DHT node started on port "<<p.dht_port << std::endl;
 
   // Join the network through any running node,
   // here using a known bootstrap node.
   // It is possible to use sockets too.
-  if (p.bootstrap_socket != "")
-    node.bootstrap(p.bootstrap_socket);
+  if (p.dht_bootstrap_socket != "")
+    node.bootstrap(p.dht_bootstrap_socket);
 
   // Generate the relevant code
   if (std::filesystem::exists(sourceCode)) {

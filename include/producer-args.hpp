@@ -4,12 +4,14 @@
 #include <getopt.h>
 #include <iostream>
 #include <opendht.h>
+#include <stdexcept>
 #include <string>
 #include <unistd.h>
 
 struct params {
-  dht::crypto::Identity identity;
-  std::string bootstrap_socket;
+  const dht::crypto::Identity identity;
+  const std::string dht_bootstrap_socket;
+  const int dht_port;
 };
 params parseAndHandleParams(int argc, char **argv);
 #endif // PRODUCER_ARGS_HPP
