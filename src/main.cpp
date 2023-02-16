@@ -12,7 +12,8 @@ const std::filesystem::path sourceCode =
     std::filesystem::u8path("../code-to-compile/example.cpp");
 const std::string exampleFunctionName = "sha256";
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   auto p = parseAndHandleParams(argc, argv);
 
   dht::DhtRunner node;
@@ -21,7 +22,6 @@ int main(int argc, char **argv) {
   // It is possible to use sockets too.
   node.run(p.dht_port, p.identity, true);
   std::cout << "DHT node started on port " << p.dht_port << std::endl;
-
   // Join the network through any running node,
   // here using a known bootstrap node.
   // It is possible to use sockets too.
@@ -29,7 +29,8 @@ int main(int argc, char **argv) {
     node.bootstrap(p.dht_bootstrap_socket);
 
   // Generate the relevant code
-  if (std::filesystem::exists(sourceCode)) {
+  if (std::filesystem::exists(sourceCode))
+  {
     std::cout << "Generating binary from " << sourceCode << std::endl;
     // Options to compile and optimize the code
     const std::list<vc::Option> l = {
@@ -45,12 +46,16 @@ int main(int argc, char **argv) {
     // Publish the socket address from which the binary can be downloaded
     node.put(exampleFunctionName,
              (std::string("tcp://127.0.0.1:") + std::to_string(port)).c_str());
-    // Serve the binary forever
-
     std::cout << "Published " << exampleFunctionName << std::endl;
-    auto ctx = serveVersion(bin_path, port);
-
-  } else {
+    // Serve the binary forever, this can be improved a lot
+    while (true)
+    {
+      std::cout << "Serving " << exampleFunctionName << std::endl;
+      auto ctx = serveVersion(bin_path, port);
+    }
+  }
+  else
+  {
     std::cerr << "Source code file " << sourceCode << " does not exist"
               << std::endl;
     exit(-1);
