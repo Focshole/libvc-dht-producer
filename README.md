@@ -17,8 +17,8 @@ It requires all [libVersioningCompiler dependencies](https://github.com/skeru/li
 ## Usage
 
 ```bash
- ./build/libvc_dht_producer -h
- Usage: ./build/libvc_dht_producer [-hcpPs]
+ ./build/libVersioningCompilerProducer -h
+ Usage: ./build/libVersioningCompilerProducer [-hcpPs]
 -c              Where to save/load private key and certificate. Specify it without ".pem" or ".crt"
 -h              Print this help
 -p              Private key certificate password to set/use. Default one is empty.

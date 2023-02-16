@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 3.20)
 project(
-  libVC_dht_producer
+  libVersioningCompilerProducer
   VERSION 0.1
   DESCRIPTION "libVC dht code producer"
   LANGUAGES CXX C)
 # target
-set(EXE_NAME "libvc_dht_producer")
-set(LIB_NAME "vc_dht_prod")
+set(EXE_NAME "libVersioningCompilerProducer")
+set(LIB_NAME "VersioningCompilerProd")
 # look for dependencies
 list(APPEND CMAKE_MODULE_PATH "/usr/local/lib/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -18,6 +18,9 @@ link_directories(${LIVC_LIB_DIR})
 
 # Check that opendht is installed
 find_package(GnuTLS REQUIRED)
+if(NOT GnuTLS_FOUND)
+  message(FATAL_ERROR "GnuTLS not found")
+endif(NOT GnuTLS_FOUND)
 include_directories(${GNUTLS_INCLUDE_DIR})
 link_directories(${GNUTLS_LIBRARIES})
 set(DEP_LIBS ${DEP_LIBS} "gnutls")
@@ -36,7 +39,7 @@ link_directories(${LIBZMQ_LIBRARIES})
 set(DEP_LIBS ${DEP_LIBS} "-lzmq")
 
 # finalize dependencies
-set(DEP_LIBS ${DEP_LIBS} ${LIBVC_LIBRARIES} "-lzmq" "-lstdc++")
+set(DEP_LIBS ${DEP_LIBS} ${LIBVC_LIBRARIES} "-lstdc++")
 
 # sources
 set(SRC_PROD
@@ -67,6 +70,12 @@ add_definitions(-DOPT_EXE_FULLPATH="${OPT_EXE_FULLPATH}")
 add_definitions(-DCLANG_EXE_NAME="${CLANG_EXE_NAME}")
 add_definitions(-DOPT_EXE_NAME="${OPT_EXE_NAME}")
 add_definitions(-DLLVM_TOOLS_BINARY_DIR="${LLVM_TOOLS_BINARY_DIR}")
+# configure
+set(FIND_LIBVC_PROD_OUTPUT
+    "${CMAKE_CURRENT_SOURCE_DIR}/config/FindLibVersioningCompilerProd.cmake")
+configure_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/config/FindLibVersioningCompilerProd.in.cmake"
+  "${FIND_LIBVC_PROD_OUTPUT}" @ONLY)
 # finalize target
 add_executable(${EXE_NAME} ${SRC_PROD} ${HDR_PROD})
 target_link_libraries(${EXE_NAME} ${DEP_LIBS})
@@ -79,7 +88,7 @@ endif()
 add_library(${LIB_NAME} STATIC ${SRC_PROD} ${HDR_PROD})
 target_link_libraries(${LIB_NAME} ${DEP_LIBS})
 install(TARGETS ${LIB_NAME} DESTINATION lib)
-install(FILES ${HDR_PROD} DESTINATION include/libvc_dht_producer)
-install(FILES ${FIND_LIBVC_OUTPUT} DESTINATION lib/cmake)
+install(FILES ${HDR_PROD} DESTINATION include/libVersioningCompilerProd)
+install(FILES ${FIND_LIBVC_PROD_OUTPUT} DESTINATION lib/cmake)
 # Install binaries too
 install(TARGETS ${EXE_NAME} DESTINATION bin)
