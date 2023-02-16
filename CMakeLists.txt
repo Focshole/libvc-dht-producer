@@ -6,6 +6,7 @@ project(
   LANGUAGES CXX C)
 # target
 set(EXE_NAME "libvc_dht_producer")
+set(LIB_NAME "vc_dht_prod")
 # look for dependencies
 list(APPEND CMAKE_MODULE_PATH "/usr/local/lib/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -74,5 +75,11 @@ target_link_libraries(${EXE_NAME} ${DEP_LIBS})
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR})
 endif()
-
+# Setup library to install
+add_library(${LIB_NAME} STATIC ${SRC_PROD} ${HDR_PROD})
+target_link_libraries(${LIB_NAME} ${DEP_LIBS})
+install(TARGETS ${LIB_NAME} DESTINATION lib)
+install(FILES ${HDR_PROD} DESTINATION include/libvc_dht_producer)
+install(FILES ${FIND_LIBVC_OUTPUT} DESTINATION lib/cmake)
+# Install binaries too
 install(TARGETS ${EXE_NAME} DESTINATION bin)
