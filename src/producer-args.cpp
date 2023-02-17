@@ -20,7 +20,7 @@ struct args {
 };
 
 void printUsage(const char *filename) {
-  std::cout << "Usage: " << filename << " [-hcpPs]\n"
+  std::cout << "Usage: " << filename << " [-h] [-cpPs args]\n"
             << "-c\t\tWhere to save/load private key and certificate. Specify "
                "the path without \".pem\" or \".crt\"\n"
             << "-h\t\tPrint this help\n"
@@ -35,7 +35,7 @@ void printUsage(const char *filename) {
 args parseArgs(int argc, char **argv) {
   args params;
   int opt;
-  while ((opt = getopt_long(argc, argv, "h:c:p:P:s:", args_getopt_struct,
+  while ((opt = getopt_long(argc, argv, "hc:p:P:s:", args_getopt_struct,
                             nullptr)) != -1) {
     switch (opt) {
     case 'c':
