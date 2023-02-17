@@ -8,6 +8,8 @@
 #include "networking.hpp"
 #include "producer-args.hpp"
 
+using namespace dht_prod;
+
 const std::filesystem::path sourceCode =
     std::filesystem::u8path("../code-to-compile/example.cpp");
 const std::string exampleFunctionName = "sha256";
@@ -51,7 +53,7 @@ int main(int argc, char **argv)
     while (true)
     {
       std::cout << "Serving " << exampleFunctionName << std::endl;
-      auto ctx = serveVersion(bin_path, port);
+      serveVersion(bin_path, port);
     }
   }
   else

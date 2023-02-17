@@ -2,6 +2,7 @@
 #define LIBVC_HPP
 
 #include "versioningCompiler/CompilerImpl/SystemCompilerOptimizer.hpp"
+#include "versioningCompiler/CompilerImpl/SystemCompiler.hpp"
 #include "versioningCompiler/Version.hpp"
 #include <filesystem>
 #include <iostream>
@@ -15,16 +16,18 @@
 #ifndef LLVM_TOOLS_BINARY_DIR
 #define LLVM_TOOLS_BINARY_DIR "/usr/bin"
 #endif
+namespace dht_prod
+{
+    // build a version of the source code and return its binary path
+    std::filesystem::path generateVersion(std::filesystem::path sourceCode,
+                                          std::vector<std::string> functionNames,
+                                          const std::list<vc::Option> &options);
 
-// build a version of the source code and return its binary path
-std::filesystem::path generateVersion(std::filesystem::path sourceCode,
-                                      std::vector<std::string> functionNames,
-                                      const std::list<vc::Option> &options);
+    std::filesystem::path generateVersion(std::filesystem::path sourceCode,
+                                          std::string functionName,
+                                          const std::list<vc::Option> &options);
 
-std::filesystem::path generateVersion(std::filesystem::path sourceCode,
-                                      std::string functionName,
-                                      const std::list<vc::Option> &options);
-
-std::filesystem::path generateVersion(std::filesystem::path sourceCode,
-                                      std::string functionName); 
+    std::filesystem::path generateVersion(std::filesystem::path sourceCode,
+                                          std::string functionName);
+}
 #endif // LIBVC_HPP

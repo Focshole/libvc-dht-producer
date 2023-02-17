@@ -8,10 +8,8 @@
 #include <string>
 #include <unistd.h>
 
-struct params {
-  const dht::crypto::Identity identity;
-  const std::string dht_bootstrap_socket;
-  const int dht_port;
-};
-params parseAndHandleParams(int argc, char **argv);
+#include "opendht-extra-utils.hpp"
+#include "producer-utils.hpp"
+
+dht_prod::params parseAndHandleParams(int argc, char **argv);
 #endif // PRODUCER_ARGS_HPP

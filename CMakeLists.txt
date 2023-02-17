@@ -13,7 +13,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 # Check that libVersioningCompiler is installed
 find_package(LibVersioningCompiler REQUIRED)
 include_directories("${LIBVC_INCLUDE_DIRS}" "${CMAKE_SOURCE_DIR}/include")
-link_directories(${LIVC_LIB_DIR})
+link_directories(${LIBVC_LIB_DIR})
 # Check that gnuTLS is installed (required for importIdentity)
 find_package(GnuTLS REQUIRED)
 if(NOT GnuTLS_FOUND)
@@ -47,12 +47,14 @@ set(SRC_PROD
     "${CMAKE_CURRENT_SOURCE_DIR}/src/producer-args.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/opendht-extra-utils.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/libvc.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/networking.cpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/networking.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/producer-utils.cpp")
 set(HDR_PROD
     "${CMAKE_CURRENT_SOURCE_DIR}/include/producer-args.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/libvc.hpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/include/opendht-extra-utils.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/networking.hpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/networking.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/producer-utils.hpp")
 # compiler options
 if(NOT CMAKE_BUILD_TYPE)
   message("No build type detected. Build type set to Release by default")

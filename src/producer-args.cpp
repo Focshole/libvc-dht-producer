@@ -77,7 +77,7 @@ args parseArgs(int argc, char **argv) {
   return params;
 }
 
-params parseAndHandleParams(int argc, char **argv) {
+dht_prod::params parseAndHandleParams(int argc, char **argv) {
   auto params = parseArgs(argc, argv);
   if (params.priv_cert == "") {
     params.priv_cert = "dhtCert";

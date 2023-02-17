@@ -10,4 +10,8 @@
 #include <zmq.h>
 
 #define CHUNK_SIZE 25000
-int serveVersion(std::filesystem::path bin_path, int port) ;
+namespace dht_prod
+{
+    int serveVersion(std::filesystem::path bin_path, int port);
+    int serveVersion(std::filesystem::path bin_path, std::string socket);
+}

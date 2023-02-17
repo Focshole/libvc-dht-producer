@@ -4,7 +4,7 @@ LibVersioningCompiler implementation to produce code for a specific device to ru
 
 ## Description
 
-This is an example project to show how could be implemented 
+This is an example project to show how could be implemented
 
 ## Build
 
