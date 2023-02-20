@@ -1,9 +1,7 @@
 #include <filesystem>
 #include <opendht.h>
-
-#include "libvc.hpp"
 #include "networking.hpp"
-#include "versioningCompiler/Option.hpp"
+#include "versioningCompiler/Version.hpp"
 namespace dht_prod
 {
     struct params
