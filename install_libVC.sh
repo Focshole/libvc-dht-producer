@@ -2,7 +2,7 @@
 rm -rf libVC
 git clone https://github.com/Focshole/libVersioningCompiler.git libVC &&
 cd libVC &&
-git checkout dev &&
+git checkout renovation-work &&
 mkdir build &&
 cd build &&
 cmake -DCMAKE_INSTALL_PREFIX="." .. &&
